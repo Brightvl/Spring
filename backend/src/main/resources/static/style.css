@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Стилизация всех ссылок */
+a {
+    text-decoration: none;
+    color: blue;
+}
+a:hover {
+    color: red;
+}

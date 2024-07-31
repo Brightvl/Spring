@@ -7,9 +7,9 @@ import lombok.Setter;
 
 import java.util.Set;
 
-//@Getter
-//@Setter
-//@RequiredArgsConstructor
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {

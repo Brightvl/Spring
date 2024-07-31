@@ -7,11 +7,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
     show-sql: true
   h2:
     console:
       enabled: true
-  mvc:
-    cors:
-      mappings: "/**"
-      allowed-origins: "http://localhost:3000"
+#  mvc:
+#    cors:
+#      mappings: "/**"
+#      allowed-origins: "http://localhost:3000"

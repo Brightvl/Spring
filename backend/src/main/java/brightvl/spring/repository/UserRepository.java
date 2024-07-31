@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+  // для поиска юзера в базе
   Optional<User> findByLogin(String login);
 
 }

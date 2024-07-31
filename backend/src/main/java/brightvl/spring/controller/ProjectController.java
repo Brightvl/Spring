@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -74,8 +75,10 @@ public class ProjectController {
             }
     )
     @PostMapping
+    @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
     public ResponseEntity<Project> create(@RequestBody @Parameter(description = "Данные нового проекта") Project project) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(projectService.create(project));
+        Project savedProject = projectService.create(project);
+        return new ResponseEntity<>(savedProject, HttpStatus.CREATED);
     }
 
     @Operation(
