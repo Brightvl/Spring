@@ -40,7 +40,7 @@ public class SecurityConfiguration {
                 .formLogin(Customizer.withDefaults()) // выдает окно авторизации - можно подменить на свое
                 .httpBasic(Customizer.withDefaults()) // поддержку Basic Auth для REST ресурсов
                 .exceptionHandling(exceptionHandling -> exceptionHandling
-                        .defaultAuthenticationEntryPointFor(
+                        .defaultAuthenticationEntryPointFor( // чтобы выдавать ошибку при rest запросах
                                 (request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized"),
                                 request -> request.getRequestURI().startsWith("/api")
                         )
