@@ -3,11 +3,12 @@ package brightvl.spring.service.page;
 import brightvl.spring.controller.page.DTO.TimesheetPageDto;
 import brightvl.spring.model.Project;
 import brightvl.spring.model.Timesheet;
-import brightvl.spring.service.ProjectService;
-import brightvl.spring.service.TimesheetService;
+import brightvl.spring.service.rest.ProjectService;
+import brightvl.spring.service.rest.TimesheetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -54,6 +55,23 @@ public class TimesheetPageService {
                 .stream()
                 .map(this::convert)
                 .toList();
+    }
+
+    /**
+     * Создание нового таймшита.
+     *
+     * @param projectId id проекта
+     * @param minutes количество минут
+     * @return созданный таймшит
+     */
+    public TimesheetPageDto create(Long projectId, int minutes) {
+        Timesheet timesheet = new Timesheet();
+        timesheet.setProjectId(projectId);
+        timesheet.setMinutes(minutes);
+        timesheet.setCreatedAt(LocalDate.now());
+
+        Timesheet createdTimesheet = timesheetService.create(timesheet);
+        return convert(createdTimesheet);
     }
 
     /**

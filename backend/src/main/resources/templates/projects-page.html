@@ -8,43 +8,44 @@
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-<h1>Проекты</h1>
-<div>
-    <table>
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Название</th>
-            <th>Действия</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="project : ${projects}">
-            <td><span th:text="${project.id}"></span></td>
-            <td><span th:text="${project.name}"></span></td>
-            <td>
-                <a th:href="@{'/home/projects/{id}'(id=${project.id})}">Перейти к проекту</a>
-                <form th:action="@{'/home/projects/' + ${project.id}}" method="post" style="display:inline;">
-                    <input type="hidden" name="_method" value="delete" />
-                    <button type="submit">Удалить</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container">
+    <h1>Проекты</h1>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Название</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project : ${projects}">
+                <td><span th:text="${project.id}"></span></td>
+                <td><span th:text="${project.name}"></span></td>
+                <td>
+                    <a th:href="@{'/home/projects/{id}'(id=${project.id})}">Перейти к проекту</a>
+                    <form th:action="@{'/home/projects/' + ${project.id}}" method="post" style="display:inline;">
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Форма для добавления нового проекта -->
+    <div>
+        <h2>Добавить новый проект</h2>
+        <form th:action="@{/home/projects}" method="post">
+            <label for="name">Название проекта:</label>
+            <input type="text" id="name" name="name" required>
+            <button type="submit">Добавить проект</button>
+        </form>
+    </div>
+
+    <a th:href="@{'/home'}">На главную</a>
 </div>
-
-<!-- Форма для добавления нового проекта -->
-<div>
-    <h2>Добавить новый проект</h2>
-    <form th:action="@{/home/projects}" method="post">
-        <label for="name">Название проекта:</label>
-        <input type="text" id="name" name="name" required>
-        <button type="submit">Добавить проект</button>
-    </form>
-</div>
-
-<a href="javascript:history.back()">Вернуться назад</a>
-
 </body>
 </html>

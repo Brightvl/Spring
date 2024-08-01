@@ -9,28 +9,46 @@
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-<h1>Записи учета рабочего времени</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Id записи</th>
-        <th>Проект</th>
-        <th>Минут потрачено</th>
-        <th>Дата записи</th>
-        <th>Перейти к записи</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="timesheet : ${timesheets}">
-        <td><span th:text="${timesheet.id}"></span></td>
-        <td><a th:href="@{'/home/projects/{id}'(id=${timesheet.projectId})}" th:text="${timesheet.projectName}"></a></td>
-        <td><span th:text="${timesheet.minutes}"></span></td>
-        <td><span th:text="${timesheet.createdAt}"></span></td>
-        <td><a th:href="@{'/home/timesheets/{id}'(id=${timesheet.id})}">Перейти к записи</a></td>
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <h1>Записи учета рабочего времени</h1>
 
-<a href="javascript:history.back()">Вернуться назад</a>
+    <!-- Добавляем форму для создания нового таймшита -->
+    <form th:action="@{/home/timesheets/create}" method="post">
+        <div>
+            <label for="projectId">ID Проекта:</label>
+            <input type="number" id="projectId" name="projectId">
+        </div>
+        <div>
+            <label for="minutes">Минут потрачено:</label>
+            <input type="number" id="minutes" name="minutes">
+        </div>
+        <div>
+            <button type="submit">Создать заметку</button>
+        </div>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Id записи</th>
+            <th>Проект</th>
+            <th>Минут потрачено</th>
+            <th>Дата записи</th>
+            <th>Перейти к записи</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="timesheet : ${timesheets}">
+            <td><span th:text="${timesheet.id}"></span></td>
+            <td><a th:href="@{'/home/projects/{id}'(id=${timesheet.projectId})}" th:text="${timesheet.projectName}"></a></td>
+            <td><span th:text="${timesheet.minutes}"></span></td>
+            <td><span th:text="${timesheet.createdAt}"></span></td>
+            <td><a th:href="@{'/home/timesheets/{id}'(id=${timesheet.id})}">Перейти к записи</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{'/home'}">На главную</a>
+</div>
 </body>
 </html>

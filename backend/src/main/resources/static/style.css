@@ -1,13 +1,100 @@
+@charset "UTF-8";
+/* Переменные */
+/* Общие стили */
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Стилизация всех ссылок */
+body {
+  font-family: "Arial, sans-serif";
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 20px;
+}
+
 a {
-    text-decoration: none;
-    color: blue;
+  text-decoration: none;
+  color: #3498db;
+  transition: color 0.3s;
 }
 a:hover {
-    color: red;
+  color: #e74c3c;
 }
+
+h1, h2 {
+  color: #3498db;
+  margin-bottom: 10px;
+}
+
+/* Стили для контейнеров */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+/* Стили для таблиц */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+table th, table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+table th {
+  background-color: #3498db;
+  color: #fff;
+}
+table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+table tbody tr:hover {
+  background-color: #eaeaea;
+}
+
+/* Стили для форм */
+form {
+  margin-bottom: 20px;
+  &
+}
+form label {
+  display: block;
+  margin-bottom: 5px;
+}
+form input, form button {
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+form button {
+  background-color: #2ecc71;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+form button:hover {
+  background-color: #25a25a;
+}
+
+/* Стили для ссылок */
+.link-back {
+  margin-top: 20px;
+  display: inline-block;
+}
+
+/* Дополнительные стили */
+.text__header {
+  margin-bottom: 15px;
+}
+
+/*# sourceMappingURL=style.css.map */

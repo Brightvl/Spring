@@ -2,7 +2,7 @@ package brightvl.spring.service.page;
 
 import brightvl.spring.controller.page.DTO.ProjectPageDto;
 import brightvl.spring.model.Project;
-import brightvl.spring.service.ProjectService;
+import brightvl.spring.service.rest.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

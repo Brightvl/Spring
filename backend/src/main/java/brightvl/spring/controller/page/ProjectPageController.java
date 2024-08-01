@@ -72,4 +72,6 @@ public class ProjectPageController {
         service.deleteProjectById(id);
         return "redirect:/home/projects";
     }
+
+
 }

@@ -1,9 +1,9 @@
-package brightvl.spring.controller;
+package brightvl.spring.controller.rest;
 
 import brightvl.spring.model.Employee;
 import brightvl.spring.model.Timesheet;
-import brightvl.spring.service.EmployeeService;
-import brightvl.spring.service.TimesheetService;
+import brightvl.spring.service.rest.EmployeeService;
+import brightvl.spring.service.rest.TimesheetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employees")
+@RequestMapping("/api/employees")
 @AllArgsConstructor
 public class EmployeeController {
 

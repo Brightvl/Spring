@@ -5,9 +5,7 @@ import brightvl.spring.service.page.TimesheetPageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -33,7 +31,7 @@ public class TimesheetPageController {
     public String getAllTimesheets(Model model) {
         List<TimesheetPageDto> timesheets = service.findAll();
         model.addAttribute("timesheets", timesheets);
-        return "timesheets-page.html";
+        return "timesheets-page";
     }
 
     /**
@@ -65,6 +63,19 @@ public class TimesheetPageController {
     public String getTimesheetsByProjectId(@PathVariable Long projectId, Model model) {
         List<TimesheetPageDto> timesheets = service.getByProjectId(projectId);
         model.addAttribute("timesheets", timesheets);
-        return "timesheets-page.html";
+        return "timesheets-page";
+    }
+
+    /**
+     * Создание нового таймшита.
+     *
+     * @param projectId id проекта
+     * @param minutes количество минут
+     * @return путь к HTML-странице всех таймшитов
+     */
+    @PostMapping("/create")
+    public String createTimesheet(@RequestParam Long projectId, @RequestParam int minutes) {
+        service.create(projectId, minutes);
+        return "redirect:/home/timesheets";
     }
 }

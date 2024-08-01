@@ -1,8 +1,7 @@
-package brightvl.spring.service;
+package brightvl.spring.service.rest;
 
 import brightvl.spring.model.Project;
 import brightvl.spring.repository.ProjectRepository;
-import brightvl.spring.repository.TimesheetRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

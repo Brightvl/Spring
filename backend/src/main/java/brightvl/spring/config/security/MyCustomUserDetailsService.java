@@ -31,14 +31,13 @@ public class MyCustomUserDetailsService implements UserDetailsService {
 
 
         List<SimpleGrantedAuthority> userRoles = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
 
         return new org.springframework.security.core.userdetails.User(
                 user.getLogin(),
                 user.getPassword(),
                 userRoles
-//            List.of()
         );
     }
 

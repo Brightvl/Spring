@@ -6,12 +6,16 @@ import brightvl.spring.model.Role;
 import brightvl.spring.model.User;
 import brightvl.spring.model.UserRole;
 import brightvl.spring.repository.ProjectRepository;
+import brightvl.spring.repository.RoleRepository;
 import brightvl.spring.repository.UserRepository;
 import brightvl.spring.repository.UserRoleRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @SpringBootApplication
 @EnableMethodSecurity(securedEnabled = true)
@@ -29,33 +33,42 @@ public class Application {
         }
 
         UserRepository userRepository = ctx.getBean(UserRepository.class);
-        UserRoleRepository userRoleRepository = ctx.getBean(UserRoleRepository.class);
+        RoleRepository roleRepository = ctx.getBean(RoleRepository.class);
+
+        Role adminRole = new Role();
+        adminRole.setName("admin");
+        adminRole = roleRepository.save(adminRole);
+
+        Role userRole = new Role();
+        userRole.setName("user");
+        userRole = roleRepository.save(userRole);
+
+        Role restRole = new Role();
+        restRole.setName("rest");
+        restRole = roleRepository.save(restRole);
 
         User admin = new User();
         admin.setLogin("admin");
         admin.setPassword("$2a$12$LbAPCsHn8ZN5MUDqDmIX7e9n1YlDkCxEt0lW3Q2WuW0M1vteo8jvG"); // admin
-        admin = userRepository.save(admin);
+        admin.setRoles(new HashSet<>(Set.of(adminRole)));
+        userRepository.save(admin);
 
         User user = new User();
         user.setLogin("user");
         user.setPassword("$2a$12$.dlnBAYq6sOUumn3jtG.AepxdSwGxJ8xA2iAPoCHSH61Vjl.JbIfq"); // user
-        user = userRepository.save(user);
+        user.setRoles(new HashSet<>(Set.of(userRole)));
+        userRepository.save(user);
 
         User anonymous = new User();
         anonymous.setLogin("anon");
         anonymous.setPassword("$2a$12$CMqutMGl/1/gYngtfHTi8.7xIFZJG/3A708y8y3cRaQNkzQTmI2O."); // anon
-        anonymous = userRepository.save(anonymous);
+        userRepository.save(anonymous);
 
-        assignRoleToUser(userRoleRepository, admin, Role.ADMIN);
-        assignRoleToUser(userRoleRepository, admin, Role.USER);
-        assignRoleToUser(userRoleRepository, user, Role.USER);
-    }
-
-    private static void assignRoleToUser(UserRoleRepository userRoleRepository, User user, Role role) {
-        UserRole userRole = new UserRole();
-        userRole.setUser(user);
-        userRole.setRoleName(role.getName());
-        userRoleRepository.save(userRole);
+        User rest = new User();
+        rest.setLogin("rest");
+        rest.setPassword("$2a$12$gjLMrDfJUQjeLJrBSULNtugji8JFPmYLsH9NLwUPUO3RuIXikKzyS");
+        rest.setRoles(new HashSet<>(Set.of(restRole)));
+        userRepository.save(rest);
     }
 
 }

@@ -18,13 +18,18 @@ public class User {
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Long id;
 
-  @Column(name = "login")
+  @Column(name = "login", nullable = false, unique = true)
   private String login;
 
-  @Column(name = "password")
+  @Column(name = "password", nullable = false)
   private String password;
 
-  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
-  private Set<UserRole> roles;
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(
+          name = "user_roles",
+          joinColumns = @JoinColumn(name = "user_id"),
+          inverseJoinColumns = @JoinColumn(name = "role_id")
+  )
+  private Set<Role> roles;
 
 }

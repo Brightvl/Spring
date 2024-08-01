@@ -1,4 +1,4 @@
-package brightvl.spring.service;
+package brightvl.spring.service.rest;
 
 import brightvl.spring.model.Timesheet;
 import brightvl.spring.repository.TimesheetRepository;

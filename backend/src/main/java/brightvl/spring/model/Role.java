@@ -1,16 +1,37 @@
 package brightvl.spring.model;
 
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
-public enum Role {
+@Setter
+@Entity
+@Table(name = "roles")
+public class Role {
 
-  ADMIN("admin"), USER("user");
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  private Long id;
 
-  private final String name;
+  @Column(name = "name", nullable = false, unique = true)
+  private String name;
 
-  Role(String name) {
-    this.name = name;
-  }
-
+  @ManyToMany(mappedBy = "roles")
+  private Set<User> users;
 }
+
+//@Getter
+//public enum Role {
+//
+//  ADMIN("admin"), USER("user");
+//
+//  private final String name;
+//
+//  Role(String name) {
+//    this.name = name;
+//  }
+//
+//}

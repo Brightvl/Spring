@@ -1,10 +1,10 @@
-package brightvl.spring.controller;
+package brightvl.spring.controller.rest;
 
 import brightvl.spring.model.Employee;
 import brightvl.spring.model.Project;
 import brightvl.spring.model.Timesheet;
-import brightvl.spring.service.ProjectService;
-import brightvl.spring.service.TimesheetService;
+import brightvl.spring.service.rest.ProjectService;
+import brightvl.spring.service.rest.TimesheetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,14 +13,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/projects")
+@RequestMapping("/api/projects")
 @AllArgsConstructor
 public class ProjectController {
 
@@ -54,7 +53,7 @@ public class ProjectController {
             }
     )
     @GetMapping("/{id}")
-    public ResponseEntity<Project> getProjectById(@PathVariable Long id) {
+    public ResponseEntity<Project> getById(@PathVariable Long id) {
         /*
         GET /projects/{id} @PathVariable будет передано в метод в качестве аргумента id
         Optional используется для обработки возможного отсутствия значения
@@ -75,7 +74,6 @@ public class ProjectController {
             }
     )
     @PostMapping
-    @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
     public ResponseEntity<Project> create(@RequestBody @Parameter(description = "Данные нового проекта") Project project) {
         Project savedProject = projectService.create(project);
         return new ResponseEntity<>(savedProject, HttpStatus.CREATED);

@@ -1,4 +1,4 @@
-package brightvl.spring.service;
+package brightvl.spring.service.rest;
 
 import brightvl.spring.model.Employee;
 import brightvl.spring.repository.EmployeeRepository;

@@ -2,6 +2,7 @@ package brightvl.spring.config.security;
 
 
 import brightvl.spring.model.Role;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -13,6 +14,7 @@ import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 
 @Configuration //указывает, что этот класс содержит конфигурацию Spring.
 @EnableWebSecurity //включает поддержку безопасности в приложении.
@@ -29,13 +31,20 @@ public class SecurityConfiguration {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(requests -> requests
-//                               .requestMatchers("/home/timesheets/**").hasAnyAuthority(Role.ADMIN.getName(),Role.USER.getName()) //доступен только пользователям с ролью "ADMIN" и user
-
+                                .requestMatchers("/home/timesheets/**").hasAnyAuthority("admin","user")
+                                .requestMatchers("/api/**").hasAuthority("rest")
                                 .anyRequest().authenticated() // нужна авторизация
 //                                .permitAll() // всем разрешено
 //                                .denyAll() // всем вход запрещен
                 )
                 .formLogin(Customizer.withDefaults()) // выдает окно авторизации - можно подменить на свое
+                .httpBasic(Customizer.withDefaults()) // поддержку Basic Auth для REST ресурсов
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                        .defaultAuthenticationEntryPointFor(
+                                (request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized"),
+                                request -> request.getRequestURI().startsWith("/api")
+                        )
+                )
                 .build();
     }
 

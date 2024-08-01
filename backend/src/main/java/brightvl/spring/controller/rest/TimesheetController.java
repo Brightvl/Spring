@@ -1,7 +1,7 @@
-package brightvl.spring.controller;
+package brightvl.spring.controller.rest;
 
 import brightvl.spring.model.Timesheet;
-import brightvl.spring.service.TimesheetService;
+import brightvl.spring.service.rest.TimesheetService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import java.util.List;
  * Контроллер для управления таймшитами.
  */
 @RestController
-@RequestMapping("/timesheets")
+@RequestMapping("/api/timesheets")
 public class TimesheetController {
 
     private final TimesheetService timesheetService;
