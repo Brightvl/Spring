@@ -3,6 +3,7 @@ package brightvl.spring.service;
 import brightvl.spring.model.User;
 import brightvl.spring.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

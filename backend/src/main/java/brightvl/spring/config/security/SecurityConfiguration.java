@@ -15,34 +15,27 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration //указывает, что этот класс содержит конфигурацию Spring.
-//@EnableGlobalAuthentication
 @EnableWebSecurity //включает поддержку безопасности в приложении.
 @EnableMethodSecurity(securedEnabled = true) //позволяет использовать аннотации безопасности на методах.// чтобы работал @Secure над классами
 public class SecurityConfiguration {
 
-    //ROLE_admin -> admin
     @Bean
     GrantedAuthorityDefaults grantedAuthorityDefaults() {
-        return new GrantedAuthorityDefaults("");
+        return new GrantedAuthorityDefaults("");// Убираем префикс "ROLE_"
     }
 
-
-    // как только мы это производим, дефолтная форма логина не требуется и нам самим нужно теперь настроить вход
+    //  Собственная настройка формы входа
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(requests -> requests
-//                                .requestMatchers("/home/projects/**").hasAuthority(Role.ADMIN.getName()) //доступен только пользователям с ролью "ADMIN".
-//                                .requestMatchers("/home/timesheets/**").hasAnyAuthority(Role.ADMIN.getName(),Role.USER.getName())
-//                                .requestMatchers("/api/**").hasAuthority("REST")
-//                                .requestMatchers("/").permitAll()
-//                                .requestMatchers("/projects").permitAll() // Разрешаем доступ к /projects без аутентификации
+//                               .requestMatchers("/home/timesheets/**").hasAnyAuthority(Role.ADMIN.getName(),Role.USER.getName()) //доступен только пользователям с ролью "ADMIN" и user
+
                                 .anyRequest().authenticated() // нужна авторизация
 //                                .permitAll() // всем разрешено
 //                                .denyAll() // всем вход запрещен
-//                                .authenticated() // пользователь должен быть авторизованным нет смысла без formLogin
                 )
-                .formLogin(Customizer.withDefaults()) // выдает окно авторизации
+                .formLogin(Customizer.withDefaults()) // выдает окно авторизации - можно подменить на свое
                 .build();
     }
 
@@ -69,7 +62,7 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
-    // суть такая что там 2 метода
+    // суть под капотом
     // String encode(CharSequence rawPassword); шифрует пароль
     // boolean matches(CharSequence rawPassword, String encodedPassword); сравнивает введенный пароль хешируя его и сравнивая с хешированнм паролем в бд
 }

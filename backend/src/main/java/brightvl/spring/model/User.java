@@ -24,10 +24,7 @@ public class User {
   @Column(name = "password")
   private String password;
 
-  @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-  @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-  @Enumerated(EnumType.STRING)
-  @Column(name = "role_name")
-  private Set<Role> roles;
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
+  private Set<UserRole> roles;
 
 }
