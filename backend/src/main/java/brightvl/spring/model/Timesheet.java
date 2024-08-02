@@ -4,6 +4,7 @@ package brightvl.spring.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
@@ -12,6 +13,7 @@ import java.time.LocalDate;
  */
 @Getter
 @Setter
+@ToString
 @Entity
 @Table
 public class Timesheet {
