@@ -1,7 +1,6 @@
 package brightvl.spring.client;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.HashSet;
 import java.util.Set;
