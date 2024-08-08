@@ -70,6 +70,22 @@ public class TimesheetController {
         timesheetService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
+    /**
+     * Обновление существующего таймшита.
+     *
+     * @param id идентификатор таймшита
+     * @param timesheet обновленный таймшит
+     * @return обновленный таймшит
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<Timesheet> update(@PathVariable Long id, @RequestBody Timesheet timesheet) {
+        return timesheetService.findById(id)
+                .map(existingTimesheet -> {
+                    timesheet.setId(id);
+                    Timesheet updated = timesheetService.update(timesheet);
+                    return ResponseEntity.ok(updated);
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
 }

@@ -1,4 +1,4 @@
-package brightvl.timesheet.example.calculator;
+package brightvl.spring.example.calculator;
 
 public class Calculator {
 

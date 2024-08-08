@@ -1,7 +1,7 @@
 //package brightvl;
 //
 //
-//import org.aspectj.weaver.ast.Test;
+//import org.junit.jupiter.api.Test;
 //
 //import static org.junit.jupiter.api.Assertions.assertTrue;
 //
@@ -12,7 +12,7 @@
 //    extends TestCase
 //{
 //    /**
-//     * Create the test case
+//     * Create the test
 //     *
 //     * @param testName name of the test case
 //     */

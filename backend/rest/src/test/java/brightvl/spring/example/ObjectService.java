@@ -1,4 +1,4 @@
-package brightvl.timesheet.example;
+package brightvl.spring.example;
 
 public class ObjectService {
 

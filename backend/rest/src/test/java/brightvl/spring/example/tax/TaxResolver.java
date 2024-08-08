@@ -1,4 +1,4 @@
-package brightvl.timesheet.example.tax;
+package brightvl.spring.example.tax;
 
 // Класс, который отдает текущий НДС
 public class TaxResolver {

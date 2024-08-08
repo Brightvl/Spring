@@ -1,4 +1,4 @@
-package brightvl.timesheet.example.calculator;
+package brightvl.spring.example.calculator;
 
 import org.junit.jupiter.api.Test;
 

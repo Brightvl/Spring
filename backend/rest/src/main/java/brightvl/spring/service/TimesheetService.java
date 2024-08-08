@@ -72,4 +72,13 @@ public class TimesheetService {
         return timesheetRepository.findByProjectId(projectId);
     }
 
+    /**
+     * Обновление существующего таймшита.
+     *
+     * @param timesheet обновленный таймшит
+     * @return обновленный таймшит
+     */
+    public Timesheet update(Timesheet timesheet) {
+        return timesheetRepository.save(timesheet);
+    }
 }

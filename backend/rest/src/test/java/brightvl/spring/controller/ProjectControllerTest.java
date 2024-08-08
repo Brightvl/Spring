@@ -1,4 +1,4 @@
-package brightvl.timesheet.controller;
+package brightvl.spring.controller;
 
 import brightvl.spring.model.Project;
 import brightvl.spring.repository.ProjectRepository;
@@ -16,8 +16,8 @@ import org.springframework.web.client.RestClient;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ActiveProfiles("test")
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test") // аннотация для того, чтобы использовать специальный application.yml в тестах
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) // поднимается на рандомном порту сервер
 //@AutoConfigureWebTestClient
 class ProjectControllerTest {
 
@@ -80,7 +80,7 @@ class ProjectControllerTest {
       .retrieve()
       .toEntity(Project.class);
 
-    // assert 200 OK
+    // assert 200 OK + проверка полей
     assertEquals(HttpStatus.OK, actual.getStatusCode());
     Project responseBody = actual.getBody();
     assertNotNull(responseBody);

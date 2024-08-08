@@ -1,4 +1,4 @@
-package brightvl.timesheet.example;
+package brightvl.spring.example;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

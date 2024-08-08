@@ -1,4 +1,4 @@
-package brightvl.timesheet.example.tax;
+package brightvl.spring.example.tax;
 
 public class TaxCalculator {
 
