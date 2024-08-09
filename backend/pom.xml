@@ -25,6 +25,7 @@
         <module>rest</module>
         <module>page</module>
         <module>eureka-server</module>
+        <module>logging-starter</module>
     </modules>
     <scm>
         <connection/>
